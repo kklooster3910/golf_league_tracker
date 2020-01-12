@@ -16,9 +16,10 @@ import { setAuthToken } from "./util/session_api_util";
 // We have not created this action yet, but will do so in the next step
 import { logout } from "./actions/session_actions";
 
+// const http = require("http");
+
 document.addEventListener("DOMContentLoaded", () => {
   let store;
-
   // If a returning user has a session token stored in localStorage
   // play around with local storage
   // debugger
@@ -40,6 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const currentTime = Date.now() / 1000;
 
     // If the user's token has expired
+    // is exp a key/value pair added from jwt_decode
     if (decodedUser.exp < currentTime) {
       // Logout the user and redirect to the login page
       store.dispatch(logout());
@@ -51,6 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   // Render our root component and pass in the store as a prop
   const root = document.getElementById("root");
-
+  // make sure you remove this
+  window.store = store;
   ReactDOM.render(<Root store={store} />, root);
 });

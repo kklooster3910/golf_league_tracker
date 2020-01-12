@@ -8,14 +8,12 @@ const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 const passport = require("passport");
 
-router.get("/test", (req, res) => res.json({ msg: "this is the users route" }));
-
 //register a user route, signup
 router.post("/register", (req, res) => {
-  debugger;
   const { errors, isValid } = validateRegisterInput(req.body);
   if (!isValid) return res.status(400).json(errors);
 
+  // debugger;
   User.findOne({ email: req.body.email }).then(user => {
     if (user) {
       // play around in here and figure out what json and JSON difference is
@@ -26,7 +24,7 @@ router.post("/register", (req, res) => {
       const newUser = new User({
         username: req.body.username,
         email: req.body.email,
-        passsword: req.body.password
+        password: req.body.password
       });
       // debugger;
       // you need to understand what this function is doing wayyyyy better
@@ -38,7 +36,7 @@ router.post("/register", (req, res) => {
           newUser
             .save()
             .then(user => {
-              const payload = { id: user.id, handle: user.handle };
+              const payload = { id: user.id, username: user.username };
 
               jwt.sign(
                 payload,
@@ -67,11 +65,11 @@ router.post("/login", (req, res) => {
   if (!isValid) {
     return res.status(400).json(errors);
   }
+  // debugger;
 
-  const email = req.body.email;
+  const username = req.body.username;
   const password = req.body.password;
-
-  User.findOne({ email }).then(user => {
+  User.findOne({ username }).then(user => {
     if (!user) {
       // Use the validations to send the error
       // get in here and play around
@@ -86,7 +84,7 @@ router.post("/login", (req, res) => {
         const payload = { id: user.id, username: user.username };
         jwt.sign(
           payload,
-          keys.secretKey,
+          keys.secretOrKey,
           { expiresIn: 9999 },
           (error, token) => {
             res.json({ success: true, token: "Bearer " + token });

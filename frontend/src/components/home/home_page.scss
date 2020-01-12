@@ -1,0 +1,21 @@
+.home-page-container {
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  button {
+    margin: 1rem;
+    max-width: 10rem;
+  }
+  .form-container {
+    padding: 2rem;
+    form {
+      label {
+        padding: 1rem;
+      }
+      button {
+        margin: 1rem;
+      }
+    }
+  }
+}
