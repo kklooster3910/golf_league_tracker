@@ -20,13 +20,15 @@ module.exports = function validateRegisterInput(data) {
     errors.emailNull = "Must Enter an Email";
   }
 
-  if (Validator.isEmail(data.email)) {
+  if (!Validator.isEmail(data.email)) {
     errors.email = "Email is invalid";
   }
-  if ((!Validator.isLength(data.password), { min: 6, max: 30 })) {
-    errors.passwordLength =
-      "Password length needs to be between 6 and 30 characters";
-  }
+  // debugger;
+  // figure out why this is always erroring out?
+  // if ((!Validator.isLength(data.password), { min: 6, max: 30 })) {
+  //   errors.passwordLength =
+  //     "Password length needs to be between 6 and 30 characters";
+  // }
 
   if (Validator.isEmpty(data.password)) {
     errors.passwordEmpty = "Must enter a password";
