@@ -1,10 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { useFormik } from "formik";
 
 import { signup } from "../../actions/session_actions";
 
 const SignUpForm = ({ registerUser }) => {
+  const signUpForm = useRef(null);
+  const usernameInput = useRef(null);
+
+  useEffect(() => {
+    usernameInput.current.focus();
+  }, []);
+
   const handleSignUpSubmit = ({ username, email, password }) => {
     const user = {
       username,
@@ -12,6 +19,8 @@ const SignUpForm = ({ registerUser }) => {
       password
     };
     registerUser(user);
+    const signUpFormArray = Array.from(signUpForm.current);
+    signUpFormArray.current.forEach(inpt => (inpt.value = ""));
   };
 
   const formik = useFormik({
@@ -26,7 +35,11 @@ const SignUpForm = ({ registerUser }) => {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit} className="sign-up-form">
+    <form
+      onSubmit={formik.handleSubmit}
+      className="sign-up-form"
+      ref={signUpForm}
+    >
       <label htmlFor="username">Username</label>
       <input
         id="username"
@@ -34,6 +47,7 @@ const SignUpForm = ({ registerUser }) => {
         type="username"
         onChange={formik.handleChange}
         value={formik.values.username}
+        ref={usernameInput}
       />
       <label htmlFor="email">Email</label>
       <input

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import SignUpForm from "./signup_form";
-import LoginForm from "./login_form";
 
+import NavBar from "../navbar/navbar";
 import { logout } from "../../actions/session_actions";
 
 import "./home_page.scss";
@@ -10,18 +9,8 @@ import "./home_page.scss";
 const HomePage = ({ username, logUserOut }) => {
   return (
     <div className="home-page-container">
+      <NavBar />
       <h1 className="home-header">Chevs League Stat Tracker</h1>
-
-      <span>
-        Logged in as {username}
-        <button onClick={() => logUserOut()}>Logout</button>
-      </span>
-
-      <div className="form-container">
-        <SignUpForm />
-        <LoginForm />
-      </div>
-      <div className="list-of-users"></div>
       <footer className="home-footer">
         Copyright &copy; 2020 Kenny Klue Dev Studios
       </footer>
@@ -29,14 +18,13 @@ const HomePage = ({ username, logUserOut }) => {
   );
 };
 
-// export default HomePage;
 // const msp = state => ({
 //   state
 // });
+
 export default connect(
   ({ session }) => ({
-    // isLoggedIn: session?.isAuthenticated,
-    username: session?.user?.username
+    username: session.user.username
   }),
   dispatch => ({
     logUserOut: () => dispatch(logout())
