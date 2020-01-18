@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 
-import LoginForm from "../home/login_form.jsx";
+import LoginForm from "./login_form";
 
 const LoginModal = props => {
   return (

@@ -5,9 +5,9 @@ import SignUpForm from "./signup_form";
 
 const SignUpModal = props => {
   return (
-    <>
+    <div className="signupmodal-container">
       <SignUpForm />
-    </>
+    </div>
   );
 };
 

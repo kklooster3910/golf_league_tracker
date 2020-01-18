@@ -14,8 +14,7 @@ const LoginForm = ({ loginUser }) => {
       password
     };
     loginUser(user);
-    const loginFormArray = Array.from(loginForm.current);
-    loginFormArray.forEach(inpt => (inpt.value = ""));
+    Array.from(loginForm.current).forEach(inpt => (inpt.value = ""));
   };
 
   useEffect(() => {
