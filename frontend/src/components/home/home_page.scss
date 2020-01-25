@@ -3,8 +3,13 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  // background-image: url("../public/photo-1505413461823-c5628c330608.jpeg");
+  // background-size: cover;
+  // background-repeat: no-repeat;
+  // background-position: center;
+  // background: rgba(0, 13, 24, 0.6);
   width: 100%;
-  height: 100vh;
+  height: 95vh;
   button {
     margin: 1rem;
     max-width: 10rem;
@@ -21,3 +26,25 @@
     }
   }
 }
+
+.home-header {
+  color: white;
+}
+
+// .modal-2020 {
+//   height: 100%;
+//   left: 0;
+//   position: fixed;
+//   top: 0;
+//   width: 100%;
+//   z-index: 10;
+//   display: none;
+//   .modal-2020-overlay {
+//     background: rgba(0, 13, 24, 0.6);
+//     height: 100%;
+//     width: 100%;
+//   }
+// }
+// .modal-2020-visible {
+//   display: block;
+// }

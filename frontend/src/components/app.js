@@ -7,6 +7,7 @@ import HomePage from "./home/home_page";
 import NavBar from "./navbar/navbar";
 
 import "./reset.scss";
+import "./global.scss";
 
 const App = () => (
   <>

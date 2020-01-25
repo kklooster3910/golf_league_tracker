@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import classNames from "classnames";
 
 import { logout } from "../../actions/session_actions";
 import SignUpModal from "../modal/signup_modal";
@@ -21,24 +22,25 @@ const NavBar = ({ username, logUserOut, isLoggedIn }) => {
   }, [isLoggedIn]);
 
   const renderSignInModal = () =>
-    !isLoggedIn && isSignUpModalOpen ? (
+    !isLoggedIn &&
+    isSignUpModalOpen && (
       <div className="signup-modal-container">
         <SignUpModal
           isSignUpModalOpen={isSignUpModalOpen}
           setIsSignUpModalOpen={setIsSignUpModalOpen}
         />
       </div>
-    ) : (
-      <></>
     );
 
   const renderLoginModal = () =>
-    !isLoggedIn && isLoginModalOpen ? (
+    !isLoggedIn &&
+    isLoginModalOpen && (
       <div className="login-modal-container">
-        <LoginModal />
+        <LoginModal
+          isLoginModalOpen={isLoginModalOpen}
+          setIsLoginModalOpen={setIsLoginModalOpen}
+        />
       </div>
-    ) : (
-      <></>
     );
 
   const buttonTypes = ["signup", "login"];

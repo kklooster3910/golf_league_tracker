@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 
 import "./home_page.scss";
@@ -15,16 +15,9 @@ const HomePage = () => {
   );
 };
 
-// const msp = state => ({
-//   state
-// });
-
 export default connect(
   ({ session }) => ({
     username: session.user.username
   }),
   null
 )(HomePage);
-
-// MAKE SURE THAT YOU FINISH WHAT IS HAPPENING IN THE ARTICLE YOU HAVE
-// PULLED UP IN

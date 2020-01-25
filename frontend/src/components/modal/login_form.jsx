@@ -1,17 +1,20 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { useFormik } from "formik";
+// import { useFormik } from "formik";
 
 import { login } from "../../actions/session_actions";
+import { resetErrors } from "../../actions/errors_actions";
 
-const LoginForm = ({ loginUser }) => {
+const LoginForm = ({ loginUser, errors = [], resetErrors }) => {
   const loginForm = useRef(null);
   const usernameInput = useRef(null);
+  const [pword, setPword] = useState("");
+  const [username, setUsername] = useState("");
 
-  const handleLoginSubmit = ({ username, password }) => {
+  const handleLoginSubmit = () => {
     const user = {
       username,
-      password
+      pword
     };
     loginUser(user);
     Array.from(loginForm.current).forEach(inpt => (inpt.value = ""));
@@ -21,29 +24,29 @@ const LoginForm = ({ loginUser }) => {
     usernameInput.current.focus();
   }, []);
 
-  const formik = useFormik({
-    initialValues: {
-      username: "",
-      password: ""
-    },
-    onSubmit: values => {
-      handleLoginSubmit(values);
+  const handleInputChange = ({ target }) => {
+    switch (target.id) {
+      case "username":
+        setUsername(target.value);
+        break;
+      case "password":
+        setPword(target.value);
+        break;
+      default:
     }
-  });
+
+    if (errors.length) resetErrors();
+  };
 
   return (
-    <form
-      onSubmit={formik.handleSubmit}
-      className="log-in-form"
-      ref={loginForm}
-    >
+    <form onSubmit={handleLoginSubmit} className="log-in-form" ref={loginForm}>
       <label htmlFor="username">Username</label>
       <input
         id="username"
         name="username"
         type="username"
-        onChange={formik.handleChange}
-        value={formik.values.username}
+        onChange={handleInputChange}
+        value={username}
         ref={usernameInput}
       />
       <label htmlFor="password">Password</label>
@@ -51,14 +54,27 @@ const LoginForm = ({ loginUser }) => {
         id="password"
         name="password"
         type="password"
-        onChange={formik.handleChange}
-        value={formik.values.password}
+        onChange={handleInputChange}
+        value={pword}
       />
       <button type="submit">Login</button>
+      <div className="login-errors">
+        {!!errors.length && (
+          <ul>
+            {errors.map((e, i) => (
+              <li key={i}>{e}</li>
+            ))}
+          </ul>
+        )}
+      </div>
     </form>
   );
 };
 
-export default connect(null, dispatch => ({
-  loginUser: user => dispatch(login(user))
-}))(LoginForm);
+export default connect(
+  ({ errors }) => ({ errors: Object.values(errors.session) }),
+  dispatch => ({
+    loginUser: user => dispatch(login(user)),
+    resetErrors: () => dispatch(resetErrors())
+  })
+)(LoginForm);

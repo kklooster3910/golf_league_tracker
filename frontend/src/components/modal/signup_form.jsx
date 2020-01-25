@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
-import { useFormik } from "formik";
+// import { useFormik } from "formik";
 
 import { signup } from "../../actions/session_actions";
 import { resetErrors } from "../../actions/errors_actions";
@@ -12,18 +12,13 @@ const SignUpForm = ({ registerUser, errors = [], resetErrors }) => {
   const usernameInput = useRef(null);
   const [pword, setPword] = useState("");
   const [username, setUsername] = useState("");
-
-  // do you want to keep pword in useState and keep using your error reducer
-  // since it's set up on the back end and everythign?
-  // or do you want to use formik validation handling?
-
-  // DO SOME CSS!
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
     usernameInput.current.focus();
   }, []);
 
-  const handleSignUpSubmit = ({ email }) => {
+  const handleSignUpSubmit = () => {
     const user = {
       username,
       email,
@@ -33,17 +28,6 @@ const SignUpForm = ({ registerUser, errors = [], resetErrors }) => {
     Array.from(signUpForm.current).forEach(input => (input.value = ""));
   };
 
-  const formik = useFormik({
-    initialValues: {
-      username: "",
-      email: "",
-      password: ""
-    },
-    onSubmit: values => {
-      handleSignUpSubmit(values);
-    }
-  });
-
   const handleInputChange = ({ target }) => {
     switch (target.id) {
       case "password":
@@ -52,6 +36,9 @@ const SignUpForm = ({ registerUser, errors = [], resetErrors }) => {
       case "username":
         setUsername(target.value);
         break;
+      case "email":
+        setEmail(target.value);
+        break;
       default:
     }
     if (errors.length) resetErrors();
@@ -59,7 +46,7 @@ const SignUpForm = ({ registerUser, errors = [], resetErrors }) => {
 
   return (
     <form
-      onSubmit={formik.handleSubmit}
+      onSubmit={handleSignUpSubmit}
       className="sign-up-form"
       ref={signUpForm}
     >
@@ -77,8 +64,8 @@ const SignUpForm = ({ registerUser, errors = [], resetErrors }) => {
         id="email"
         name="email"
         type="email"
-        onChange={formik.handleChange}
-        value={formik.values.email}
+        onChange={handleInputChange}
+        value={email}
       />
       <label htmlFor="password">Password</label>
       <input
