@@ -12,22 +12,21 @@ const NavBar = ({ username, logUserOut, isLoggedIn }) => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   useEffect(() => {
+    // should I remove this when I make it so that you redirect after
+    // logging in?
     return () => {
       setIsLoginModalOpen(false);
       setIsSignUpModalOpen(false);
     };
   }, [isLoggedIn]);
 
-  const handleOpenModal = buttonType => {
-    buttonType === "signup"
-      ? setIsSignUpModalOpen(true)
-      : setIsLoginModalOpen(true);
-  };
-
   const renderSignInModal = () =>
     !isLoggedIn && isSignUpModalOpen ? (
       <div className="signup-modal-container">
-        <SignUpModal />
+        <SignUpModal
+          isSignUpModalOpen={isSignUpModalOpen}
+          setIsSignUpModalOpen={setIsSignUpModalOpen}
+        />
       </div>
     ) : (
       <></>
@@ -53,12 +52,10 @@ const NavBar = ({ username, logUserOut, isLoggedIn }) => {
             <button onClick={() => logUserOut()}>Logout</button>
           ) : (
             <>
-              <button onClick={() => handleOpenModal(buttonTypes[0])}>
+              <button onClick={() => setIsSignUpModalOpen(true)}>
                 Sign Up
               </button>
-              <button onClick={() => handleOpenModal(buttonTypes[1])}>
-                Login
-              </button>
+              <button onClick={() => setIsLoginModalOpen(true)}>Login</button>
             </>
           )}
         </div>

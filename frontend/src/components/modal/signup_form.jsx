@@ -5,6 +5,8 @@ import { useFormik } from "formik";
 import { signup } from "../../actions/session_actions";
 import { resetErrors } from "../../actions/errors_actions";
 
+import "./signupform.scss";
+
 const SignUpForm = ({ registerUser, errors = [], resetErrors }) => {
   const signUpForm = useRef(null);
   const usernameInput = useRef(null);
