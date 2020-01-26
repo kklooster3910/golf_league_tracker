@@ -26,7 +26,7 @@ const SignUpModal = ({ isSignUpModalOpen, setIsSignUpModalOpen }) => {
   }, []);
 
   return (
-    <div className="signupmodal-container" ref={me}>
+    <div className="modal-container" ref={me}>
       <SignUpForm />
     </div>
   );

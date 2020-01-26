@@ -8,6 +8,11 @@ import LoginModal from "../modal/login_ modal";
 
 import "./navbar.scss";
 
+// FIGURE OUT HOW YOU'RE GOING TO GET THE MODAL TO APPEAR AND HAVE THE
+// BACKGROUND DARKEN YOU LOSER
+
+// and do some styling bruh... why do you hate it so much
+
 const NavBar = ({ username, logUserOut, isLoggedIn }) => {
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);

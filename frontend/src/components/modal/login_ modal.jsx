@@ -24,7 +24,7 @@ const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen }) => {
   });
 
   return (
-    <div className="login-modal-container" ref={me}>
+    <div className="modal-container" ref={me}>
       <LoginForm />
     </div>
   );
