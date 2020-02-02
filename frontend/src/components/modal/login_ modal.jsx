@@ -1,31 +1,22 @@
-import React, { useRef, useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 
-import { handleOutsideClick } from "../../util/utils";
+import { Modal, ModalWrapper } from "./modal";
 
-import LoginForm from "./login_form";
+import LoginForm from "../forms/login_form";
 
 const LoginModal = ({ isLoginModalOpen, setIsLoginModalOpen }) => {
-  const me = useRef(null);
-  const rootElement = document.getElementById("root");
-
-  useEffect(() => {
-    rootElement.addEventListener(
-      "click",
-      handleOutsideClick(me, setIsLoginModalOpen, isLoginModalOpen)
-    );
-
-    return () => {
-      rootElement.removeEventListener(
-        "click",
-        handleOutsideClick(me, setIsLoginModalOpen, isLoginModalOpen)
-      );
-    };
-  });
-
   return (
-    <div className="modal-container" ref={me}>
-      <LoginForm />
+    <div className="modal-container">
+      <Modal
+        closeModal={() => setIsLoginModalOpen(false)}
+        isModalOpen={isLoginModalOpen}
+        render={() => (
+          <ModalWrapper>
+            <LoginForm />
+          </ModalWrapper>
+        )}
+      ></Modal>
     </div>
   );
 };

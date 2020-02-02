@@ -45,7 +45,7 @@ const Protected = ({ component: Component, loggedIn, ...rest }) => (
 
 // Use the isAuthenitcated slice of state to determine whether a user is logged in
 
-const mSTP = state => ({ loggedIn: state.session.isAuthenticated });
+const mstp = state => ({ loggedIn: state.session.isAuthenticated });
 
-export const AuthRoute = connect(mSTP)(Auth);
-export const ProtectedRoute = connect(mSTP)(Protected);
+export const AuthRoute = connect(mstp)(Auth);
+export const ProtectedRoute = connect(mstp)(Protected);

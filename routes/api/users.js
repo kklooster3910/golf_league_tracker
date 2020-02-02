@@ -6,7 +6,7 @@ const User = require("../../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
-const passport = require("passport");
+// const passport = require("passport");
 
 //register a user route, signup
 router.post("/register", (req, res) => {
@@ -104,18 +104,16 @@ router.post("/login", (req, res) => {
 
 // If you make a GET request to localhost:5000/api/users/current in Postman without
 // sending a token, you should get an 'Unauthorized' error message.
-// dig into passport.authenticate a little big
+// dig into passport.authenticate a little bit
 // debugger;
-router.get(
-  "/current",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    res.json({
-      id: req.user.id,
-      handle: req.user.handle,
-      email: req.user.email
-    });
-  }
-);
+// router.get(
+//   "/current",
+//   passport.authenticate("jwt", { session: false }),
+//   (req, res) => {
+//     res.json({
+//       id: req.user.id,
+//       handle: req.user.handle,
+//       email: req.user.email
+//     });
 
 module.exports = router;

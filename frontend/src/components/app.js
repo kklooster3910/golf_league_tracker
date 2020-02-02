@@ -5,6 +5,7 @@ import { Route } from "react-router";
 
 import HomePage from "./home/home_page";
 import NavBar from "./navbar/navbar";
+import Course from "./course";
 
 import "./reset.scss";
 import "./global.scss";
@@ -14,6 +15,7 @@ const App = () => (
     <NavBar />
     <Switch>
       <Route exact path="/" component={HomePage} />
+      <ProtectedRoute exact path="/course/:courseId" component={Course} />
     </Switch>
   </>
 );

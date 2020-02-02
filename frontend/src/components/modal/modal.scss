@@ -1,0 +1,42 @@
+@import "../global.scss";
+
+.modal {
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  display: none;
+  .modal-overlay {
+    background: $darkShadow;
+    height: 100%;
+    width: 100%;
+  }
+}
+.visible {
+  display: block;
+}
+
+.content-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  max-width: 71rem;
+  background: white;
+  box-shadow: 0 2px 24px 0;
+  height: 100%;
+  padding: 1rem;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 1rem;
+  transform: translate(-50%, -50%);
+}
+
+@media (min-width: $smallBreak) {
+  .content-container {
+    width: calc(100% - 10rem);
+    height: calc(100% - 10rem);
+  }
+}
