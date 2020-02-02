@@ -7,7 +7,7 @@ import { RESET_SESSION_ERRORS } from "../actions/errors_actions";
 
 const _nullErrors = [];
 
-const SessionErrorsReducer = (state = _nullErrors, action) => {
+export default (state = _nullErrors, action) => {
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_SESSION_ERRORS:
@@ -20,5 +20,3 @@ const SessionErrorsReducer = (state = _nullErrors, action) => {
       return state;
   }
 };
-
-export default SessionErrorsReducer;

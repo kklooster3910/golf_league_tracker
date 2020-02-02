@@ -11,7 +11,7 @@ import configureStore from "./store/store";
 import jwt_decode from "jwt-decode";
 
 // The session utility we just created
-import { setAuthToken } from "./util/session_api_util";
+import { setAuthToken } from "./util/session_api";
 
 // We have not created this action yet, but will do so in the next step
 import { logout } from "./actions/session_actions";

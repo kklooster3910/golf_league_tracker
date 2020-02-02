@@ -25,6 +25,5 @@ export const Input = ({ type, fieldParams }) => {
     default:
       break;
   }
-  // debugger;
   return <>{returnField}</>;
 };

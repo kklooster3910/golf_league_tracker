@@ -2,7 +2,7 @@
 // whole file since we will be adding more later
 import jwt_decode from "jwt-decode";
 
-import * as APIUtil from "../util/session_api_util";
+import * as APIUtil from "../util/session_api";
 // import jwt_decode from "jwt-decode";
 
 // This pattern should be familiar to you BUT REVIEW

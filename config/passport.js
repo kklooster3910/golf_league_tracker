@@ -10,7 +10,7 @@ const keys = require("../config/keys");
 // WHAT IS HAPPENING IN THIS FILE?
 // why aren't we using User and what is done?
 
-// is this what allows me to have iat and exp on currentUser object
+// is this what allows me to have it and exp on currentUser object
 // in the reducer under action when receiving a new user while
 // signing up
 

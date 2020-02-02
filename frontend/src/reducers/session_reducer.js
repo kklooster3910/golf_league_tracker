@@ -1,7 +1,6 @@
 import {
   RECEIVE_USER_LOGOUT,
-  RECEIVE_CURRENT_USER,
-  RECEIVE_SESSION_ERRORS
+  RECEIVE_CURRENT_USER
 } from "../actions/session_actions";
 
 const initialState = {
@@ -9,8 +8,9 @@ const initialState = {
   user: {}
 };
 
-export default function(state = initialState, action) {
-  switch (action.type) {
+export default (state = initialState, { type, currentUser }) => {
+  Object.freeze(state);
+  switch (type) {
     case RECEIVE_USER_LOGOUT:
       return {
         isAuthenticated: false,
@@ -19,10 +19,10 @@ export default function(state = initialState, action) {
     case RECEIVE_CURRENT_USER:
       return {
         ...state,
-        isAuthenticated: !!action.currentUser,
-        user: action.currentUser
+        isAuthenticated: !!currentUser,
+        user: currentUser
       };
     default:
       return state;
   }
-}
+};
