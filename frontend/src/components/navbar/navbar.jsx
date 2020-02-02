@@ -1,74 +1,66 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import classNames from "classnames";
 
 import { logout } from "../../actions/session_actions";
 import SignUpModal from "../modal/signup_modal";
 import LoginModal from "../modal/login_ modal";
+import { Button } from "../shared_comps";
 
 import "./navbar.scss";
 
-// FIGURE OUT HOW YOU'RE GOING TO GET THE MODAL TO APPEAR AND HAVE THE
-// BACKGROUND DARKEN YOU LOSER
-
-// and do some styling bruh... why do you hate it so much
-
 const NavBar = ({ username, logUserOut, isLoggedIn }) => {
-  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-
-  useEffect(() => {
-    // should I remove this when I make it so that you redirect after
-    // logging in?
-    return () => {
-      setIsLoginModalOpen(false);
-      setIsSignUpModalOpen(false);
-    };
-  }, [isLoggedIn]);
+  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
 
   const renderSignInModal = () =>
     !isLoggedIn &&
     isSignUpModalOpen && (
-      <div className="signup-modal-container">
-        <SignUpModal
-          isSignUpModalOpen={isSignUpModalOpen}
-          setIsSignUpModalOpen={setIsSignUpModalOpen}
-        />
-      </div>
+      <SignUpModal
+        isSignUpModalOpen={isSignUpModalOpen}
+        setIsSignUpModalOpen={setIsSignUpModalOpen}
+      />
     );
 
   const renderLoginModal = () =>
     !isLoggedIn &&
     isLoginModalOpen && (
-      <div className="login-modal-container">
-        <LoginModal
-          isLoginModalOpen={isLoginModalOpen}
-          setIsLoginModalOpen={setIsLoginModalOpen}
-        />
-      </div>
+      <LoginModal
+        isLoginModalOpen={isLoginModalOpen}
+        setIsLoginModalOpen={setIsLoginModalOpen}
+      />
     );
-
-  const buttonTypes = ["signup", "login"];
 
   return (
     <>
       <div className="navbar-container">
-        <div className="user-info">Logged in as: {username}</div>
+        <div className="user-info">
+          {isLoggedIn && `Logged in as: ${username}`}
+        </div>
         <div className="log-in-out-buttons">
           {isLoggedIn ? (
-            <button onClick={() => logUserOut()}>Logout</button>
+            <Button
+              action={() => logUserOut()}
+              copy="Logout"
+              classes={["logout"]}
+            />
           ) : (
             <>
-              <button onClick={() => setIsSignUpModalOpen(true)}>
-                Sign Up
-              </button>
-              <button onClick={() => setIsLoginModalOpen(true)}>Login</button>
+              <Button
+                action={() => setIsSignUpModalOpen(true)}
+                copy="SignUp"
+                classes={["signup"]}
+              />
+              <Button
+                action={() => setIsLoginModalOpen(true)}
+                copy="Login"
+                classes={["login"]}
+              />
             </>
           )}
         </div>
       </div>
-      {renderLoginModal()}
       {renderSignInModal()}
+      {renderLoginModal()}
     </>
   );
 };

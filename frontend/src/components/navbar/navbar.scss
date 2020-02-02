@@ -1,31 +1,13 @@
+@import "../global.scss";
+
 .navbar-container {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
-  margin: 1rem;
-  background-color: #34373c;
-  width: 100%;
-  .user-info {
-    color: #f3f3f3;
-  }
+  background-color: $lightGrey;
   .log-in-out-buttons {
-    color: #f3f3f3;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
-
-  .sign-up-form {
-    li {
-      padding: 0.5rem;
-    }
-    .signup-errors {
-      color: red;
-      font-weight: bold;
-    }
-  }
-}
-
-.login-modal-container,
-.signup-modal-container {
-  height: 100%;
-  width: 100%;
-  // background: rgba(0, 13, 24, 0.6);
-  background: black;
 }

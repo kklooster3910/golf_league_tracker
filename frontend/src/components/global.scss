@@ -1,3 +1,15 @@
 body {
   font-family: "Slabo 27px", serif;
 }
+
+//screen query sizes
+$smallBreak: 420px;
+$largeBreak: 1200px;
+
+//colors
+$darkShadow: rgba(0, 0, 0, 0.5);
+$lightGrey: #6b6e70;
+$medGrey: #474b4f;
+$darkGrey: #222629;
+$brightGreen: #86c232;
+$mainGreen: #61892f;
