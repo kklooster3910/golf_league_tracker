@@ -4,10 +4,11 @@ const Course = require("../../models/Course");
 
 const validText = require("../../validation/valid_text");
 const doesCourseExist = require("./mongo_api");
-const mapFrontBacks = require("./mongo_api");
+const mapFrontToBacks = require("./mongo_api");
+const cleanQuotesOff = require("./mongo_api");
 
 router.post("/addCourse", (req, res) => {
-  const { courseName, par, yardage, frontNine, backNine } = req.body;
+  const { courseName, par, yardage, frontNine, backNine, slope } = req.body;
   const errors = {};
   errors.isValidCourse = validText(courseName);
   doesCourseExist(courseName, errors, res);
@@ -15,8 +16,9 @@ router.post("/addCourse", (req, res) => {
     courseName,
     par,
     yardage,
-    frontNine: mapFrontBacks(frontNine),
-    backNine: mapFrontBacks(backNine)
+    frontNine,
+    backNine,
+    slope
   })
     .save()
     .then(course => {
