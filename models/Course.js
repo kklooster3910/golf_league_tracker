@@ -6,6 +6,7 @@ const frontNineSchema = new Schema({
   distances: { type: Array, default: [] },
   handicap: { type: Number, required: true }
 });
+
 const backNineSchema = new Schema({
   par: { type: Number, required: true },
   distances: { type: Array, default: [] },
