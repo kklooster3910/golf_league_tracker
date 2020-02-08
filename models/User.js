@@ -1,26 +1,11 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-// things to add to a user?
-// putts
-// handicap?
-// averages?
-// should their season points and scores live on a seasons object?
-// ig: const seasons = {
-//rounds: 7 -- 7 week long season
-//scheduledRounds: [ 7/19 2019, date of round scheduled out --- this might get built on front end? not sure ]
-//year: 2019
-//name: 'chevs.com tour'
-//players: [objectId:'userId']
-//course: 'Field Stone'
-//size: numOfPlayers??
-// }
-
 const puttsSchema = new Schema({
   season: { type: Schema.Types.ObjectId, ref: "season" },
   round: { type: Schema.Types.ObjectId, ref: "round" },
-  hole: { type: Schema.Types.ObjectId, ref: "putt" },
-  putts: { type: Number, required: true }
+  hole: { type: Schema.Types.ObjectId, ref: "hole" },
+  putts: Number
 });
 
 const UserSchema = new Schema({
@@ -41,9 +26,8 @@ const UserSchema = new Schema({
     default: Date.now
   },
   putts: [puttsSchema],
-  handicap: { type: Number, required: true, default: 0 },
-  averages = { type: Array, default: []},
-  
+  averages: { type: Array, default: [] },
+  handicap: { type: Number, required: true, default: 0 }
 });
 
 module.exports = User = mongoose.model("User", UserSchema);

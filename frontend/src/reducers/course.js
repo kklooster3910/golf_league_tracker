@@ -2,7 +2,7 @@ import {
   RECEIVE_CURRENT_COURSE,
   RECEIVE_COURSE_ERRORS
   // should probs do something with this
-} from "../actions/course_actions";
+} from "../actions/course";
 
 const initialState = {
   currentCourse: {
@@ -11,18 +11,22 @@ const initialState = {
     yardage: "",
     frontNine: [],
     backNine: [],
-    creationDate: ""
+    creationDate: "",
+    receivedAt: null
   }
 };
 
-export default (state = initialState, { type, currentCourse }) => {
+export default (state = initialState, { type, currentCourse, errors }) => {
   Object.freeze(state);
   switch (type) {
     case RECEIVE_CURRENT_COURSE:
       return {
         ...state,
-        currentCourse
+        currentCourse,
+        receivedAt: Date.now()
       };
+    case RECEIVE_COURSE_ERRORS:
+      return { ...state, errors };
     default:
       return state;
   }

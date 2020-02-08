@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 import { useFormik } from "formik";
 
-import { signup } from "../../actions/session_actions";
-import { resetErrors } from "../../actions/errors_actions";
+import { signup } from "../../actions/session";
+import { resetErrors } from "../../actions/errors";
 
 import { Button, Input } from "../shared_comps";
 

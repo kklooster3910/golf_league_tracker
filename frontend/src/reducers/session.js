@@ -1,7 +1,4 @@
-import {
-  RECEIVE_USER_LOGOUT,
-  RECEIVE_CURRENT_USER
-} from "../actions/session_actions";
+import { RECEIVE_USER_LOGOUT, RECEIVE_CURRENT_USER } from "../actions/session";
 
 const initialState = {
   isAuthenticated: false,
