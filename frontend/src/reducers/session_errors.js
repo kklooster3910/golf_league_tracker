@@ -1,9 +1,9 @@
 import {
   RECEIVE_SESSION_ERRORS,
   RECEIVE_CURRENT_USER
-} from "../actions/session_actions";
+} from "../actions/session";
 
-import { RESET_SESSION_ERRORS } from "../actions/errors_actions";
+import { RESET_SESSION_ERRORS } from "../actions/errors";
 
 const _nullErrors = [];
 

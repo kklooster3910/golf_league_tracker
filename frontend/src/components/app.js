@@ -6,6 +6,8 @@ import { Route } from "react-router";
 import HomePage from "./home/home_page";
 import NavBar from "./navbar/navbar";
 import Course from "./course";
+import Season from "./season";
+import Round from "./round";
 
 import "./reset.scss";
 import "./global.scss";
@@ -16,6 +18,8 @@ const App = () => (
     <Switch>
       <Route exact path="/" component={HomePage} />
       <ProtectedRoute exact path="/course/:courseId" component={Course} />
+      <ProtectedRoute exact path="/season/:seasonId" component={Season} />
+      <ProtectedRoute exact path="/round/:roundId" component={Round} />
     </Switch>
   </>
 );

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
-import { logout } from "../../actions/session_actions";
+import { logout } from "../../actions/session";
 import SignUpModal from "../modal/signup_modal";
 import LoginModal from "../modal/login_ modal";
 import { Button } from "../shared_comps";

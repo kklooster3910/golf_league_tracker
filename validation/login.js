@@ -3,16 +3,17 @@ const validText = require("./valid_text");
 
 module.exports = function validateLoginInput(data) {
   let errors = {};
+  let { username, password } = data;
   // MAKE SURE VALIDATIONS WORKS
-  data.username = validText(data.username) ? data.username : "";
-  // data.email = validText(data.email) || "";
-  data.password = validText(data.password) ? data.password : "";
+  username = validText(username) ? username : "";
+  // email = validText(email) || "";
+  password = validText(password) ? password : "";
 
-  if (Validator.isEmpty(data.username)) {
+  if (Validator.isEmpty(username)) {
     errors.username = "Must Enter a Username";
   }
 
-  if (Validator.isEmpty(data.password)) {
+  if (Validator.isEmpty(password)) {
     errors.passwordEmpty = "Must enter a password";
   }
 

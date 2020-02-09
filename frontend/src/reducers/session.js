@@ -1,7 +1,4 @@
-import {
-  RECEIVE_USER_LOGOUT,
-  RECEIVE_CURRENT_USER
-} from "../actions/session_actions";
+import { RECEIVE_USER_LOGOUT, RECEIVE_CURRENT_USER } from "../actions/session";
 
 const initialState = {
   isAuthenticated: false,
@@ -26,6 +23,3 @@ export default (state = initialState, { type, currentUser }) => {
       return state;
   }
 };
-
-//adding a comment for GIT ssh  prurpose --- hopefully I don't have to login every time I
-// make a push now

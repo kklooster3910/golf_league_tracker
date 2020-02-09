@@ -2,8 +2,8 @@ import React, { useRef, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useFormik } from "formik";
 
-import { login } from "../../actions/session_actions";
-import { resetErrors } from "../../actions/errors_actions";
+import { login } from "../../actions/session";
+import { resetErrors } from "../../actions/errors";
 import { Button, Input } from "../shared_comps";
 
 const LoginForm = ({ loginUser, errors = [], resetErrors }) => {

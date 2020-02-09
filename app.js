@@ -3,7 +3,9 @@ const app = express();
 const db = require("./config/keys").mongoURI;
 const mongoose = require("mongoose");
 const users = require("./routes/api/users");
+const seasons = require("./routes/api/seasons");
 const courses = require("./routes/api/courses");
+const rounds = require("./routes/api/rounds");
 const bodyparser = require("body-parser");
 const passport = require("passport");
 
@@ -22,3 +24,5 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 app.use("/api/users", users);
 app.use("/api/courses", courses);
+app.use("/api/seasons", seasons);
+app.use("/api/rounds", rounds);

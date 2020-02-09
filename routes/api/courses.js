@@ -3,26 +3,26 @@ const router = express.Router();
 const Course = require("../../models/Course");
 
 const validText = require("../../validation/valid_text");
-const doesCourseExist = require("./mongo_api");
-const mapFrontBacks = require("./mongo_api");
+const doesCourseExist = require("./mongo_api").doesCourseExist;
 
-router.post("/addCourse", (req, res) => {
-  const { courseName, par, yardage, frontNine, backNine } = req.body;
+router.post("/addCourse", async (req, res) => {
+  const { courseName, par, yardage, frontNine, backNine, slope } = req.body;
   const errors = {};
   errors.isValidCourse = validText(courseName);
-  doesCourseExist(courseName, errors, res);
+  await doesCourseExist(courseName, errors, res);
   new Course({
     courseName,
     par,
     yardage,
-    frontNine: mapFrontBacks(frontNine),
-    backNine: mapFrontBacks(backNine)
+    frontNine,
+    backNine,
+    slope
   })
     .save()
     .then(course => {
       res.json(course);
     })
-    .catch(err => console.log(err));
+    .catch(err => console.error(err));
 });
 
 router.get("/course/:courseId", (req, res) => {
@@ -31,7 +31,7 @@ router.get("/course/:courseId", (req, res) => {
     .then(course => {
       res.json(course);
     })
-    .catch(err => console.log(err));
+    .catch(err => console.error(err));
 });
 
 module.exports = router;
