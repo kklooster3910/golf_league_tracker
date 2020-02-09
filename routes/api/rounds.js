@@ -24,3 +24,17 @@ router.post("/newRound", async (req, res) => {
     .then(round => res.json(round))
     .catch(err => console.error(err));
 });
+
+router.get("/round/:id", async (req, res) => {
+  const { id: roundId } = req.params;
+  let round;
+  try {
+    round = await Round.findById({ _id: roundId });
+    round = await Round.populatePlayers(round);
+  } catch (e) {
+    console.error(e);
+  }
+  if (round) return res.json(round);
+});
+
+module.exports = router;

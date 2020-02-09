@@ -6,6 +6,8 @@ const Player = require("./User");
 const Round = require("./Round");
 
 const aSyncMap = require("../routes/api/mongo_api").aSyncMap;
+const mapCleanKeys = require("./model_api").mapCleanKeys;
+const cleanPlayersFunc = require("./model_api").cleanPlayersFunc;
 
 const players = {
   player: { type: Schema.Types.ObjectId, ref: "user" }
@@ -26,30 +28,26 @@ const SeasonSchema = new Schema({
 });
 
 SeasonSchema.statics.populateSeason = async seasonObj => {
-  const cleanSeason = {};
-
-  Object.keys(seasonObj._doc)
-    .filter(
-      courseKey =>
-        courseKey != "players" && courseKey != "course" && courseKey != "rounds"
-    )
-    .forEach(key => (cleanSeason[key] = seasonObj[key]));
-
+  const cleanSeason = await mapCleanKeys(seasonObj, [
+    "players",
+    "course",
+    "rounds"
+  ]);
   const players = await aSyncMap(
     seasonObj.players.map(p => p.id),
     Player.findById,
     Player
   );
-
+  const cleanPlayers = [];
+  await cleanPlayersFunc(players, cleanPlayers);
   const course = await Course.findOne({ _id: seasonObj.course.toString() });
-
   const rounds = await aSyncMap(
     seasonObj.rounds.map(r => r.id),
     Round.findById,
     Round
   );
 
-  cleanSeason.players = players;
+  cleanSeason.players = cleanPlayers;
   cleanSeason.course = course;
   cleanSeason.rounds = rounds;
 
