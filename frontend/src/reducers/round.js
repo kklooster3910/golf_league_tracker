@@ -10,6 +10,7 @@ import {
 
 const initialState = {
   currentRound: {
+    _id: "",
     startTime: "",
     startDate: "",
     scores: [],

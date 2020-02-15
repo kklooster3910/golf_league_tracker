@@ -4,7 +4,9 @@ import { useFormik } from "formik";
 
 import { login } from "../../actions/session";
 import { resetErrors } from "../../actions/errors";
-import { Button, Input } from "../shared_comps";
+import { Button, Input, Header, renderErrors } from "../shared_comps";
+
+import "./form.scss";
 
 const LoginForm = ({ loginUser, errors = [], resetErrors }) => {
   const loginForm = useRef(null);
@@ -72,28 +74,24 @@ const LoginForm = ({ loginUser, errors = [], resetErrors }) => {
     }
   };
 
-  const renderErrors = () =>
-    !!errors.length && (
-      <ul>
-        {errors.map((e, i) => (
-          <li key={i}>{e}</li>
-        ))}
-      </ul>
-    );
-
   return (
-    <form
-      onSubmit={formik.handleSubmit}
-      className="log-in-form"
-      ref={loginForm}
-    >
-      <label htmlFor="username">Username</label>
-      <Input {...{ ...usernameInputParams }} />
-      <label htmlFor="password">Password</label>
-      <Input {...{ ...passwordInputParams }} />
-      <Button copy="Login" />
-      <div className="login-errors">{renderErrors()}</div>
-    </form>
+    <>
+      <Header copy="Login" classes={["login-modal"]} />
+      <form onSubmit={formik.handleSubmit} className="form" ref={loginForm}>
+        <div className="inputs-container">
+          <div className="input-container">
+            <label htmlFor="username">Username</label>
+            <Input {...{ ...usernameInputParams }} />
+          </div>
+          <div className="input-container">
+            <label htmlFor="password">Password</label>
+            <Input {...{ ...passwordInputParams }} />
+          </div>
+        </div>
+        <Button copy="Login" />
+        <div className="errors">{renderErrors(errors)}</div>
+      </form>
+    </>
   );
 };
 

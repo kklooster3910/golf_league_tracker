@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const puttsSchema = new Schema({
-  season: { type: Schema.Types.ObjectId, ref: "season" },
-  round: { type: Schema.Types.ObjectId, ref: "round" },
+  season: { type: Schema.Types.ObjectId, ref: "Season" },
+  round: { type: Schema.Types.ObjectId, ref: "Round" },
   hole: { type: Schema.Types.ObjectId, ref: "hole" },
   putts: Number
 });

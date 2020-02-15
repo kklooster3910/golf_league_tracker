@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import classNames from "classnames";
 
@@ -12,6 +12,15 @@ export const Modal = props => {
     modal: true,
     visible: isModalOpen
   });
+
+  // TRY AND WRITE A QUICK FUNC/EVENT LISTENER
+  // THAT goes for the html/body and freezes y scroll
+  // so you can't scroll the background when the modal
+  // is open
+
+  // useEffect(() => {
+  //   // document
+  // }, []);
 
   return (
     <div className={modalClasses}>

@@ -1,0 +1,13 @@
+@import "../global.scss";
+
+.header,
+.signup-modal {
+  font-weight: bold;
+  font-size: 2.5rem;
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem;
+  font-style: italic;
+  text-decoration: underline;
+  color: $medGrey;
+}

@@ -7,13 +7,17 @@ const cleanPlayersFunc = require("./model_api").cleanPlayersFunc;
 const aSyncMap = require("../routes/api/mongo_api").aSyncMap;
 
 const players = {
-  player: { type: Schema.Types.ObjectId, ref: "user" }
+  player: { type: Schema.Types.ObjectId, ref: "User" }
 };
 
 const playerScoreSchema = new Schema({
-  player: { type: Schema.Types.ObjectId, ref: "user" },
+  player: { type: Schema.Types.ObjectId, ref: "User" },
   score: { type: Number, required: true }
 });
+
+// how am I mapping the correct hole id to this hole from the course?
+// make sure you double check your add scores ep and make a add score
+// a round should be setup to have two opponents
 
 const scoresSchema = new Schema({
   hole: { type: Schema.Types.ObjectId, ref: "hole" },
@@ -23,10 +27,13 @@ const scoresSchema = new Schema({
 const RoundSchema = new Schema({
   startTime: { type: Date, required: true },
   startDate: { type: Date, required: true },
-  players: [players],
-  scores: [scoresSchema]
+  players: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  scores: [scoresSchema],
+  course: { type: Schema.Types.ObjectId, ref: "Course" },
+  season: { type: Schema.Types.ObjectId, ref: "Season" }
 });
 
+//DEP
 RoundSchema.statics.populatePlayers = async roundObj => {
   const cleanRound = await mapCleanKeys(roundObj, ["players"]);
   const players = await aSyncMap(

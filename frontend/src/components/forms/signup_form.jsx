@@ -5,9 +5,9 @@ import { useFormik } from "formik";
 import { signup } from "../../actions/session";
 import { resetErrors } from "../../actions/errors";
 
-import { Button, Input } from "../shared_comps";
+import { Button, Input, Header, renderErrors } from "../shared_comps";
 
-import "./signupform.scss";
+import "./form.scss";
 
 const SignUpForm = ({ registerUser, errors = [], resetErrors }) => {
   const signUpForm = useRef(null);
@@ -59,6 +59,7 @@ const SignUpForm = ({ registerUser, errors = [], resetErrors }) => {
 
   const usernameInputParams = {
     type: "input",
+    classes: ["username"],
     fieldParams: {
       id: "username",
       name: "username",
@@ -70,6 +71,7 @@ const SignUpForm = ({ registerUser, errors = [], resetErrors }) => {
   };
   const emailInputParams = {
     type: "input",
+    classes: ["email"],
     fieldParams: {
       id: "email",
       name: "email",
@@ -81,6 +83,7 @@ const SignUpForm = ({ registerUser, errors = [], resetErrors }) => {
   };
   const passwordInputParams = {
     type: "input",
+    classes: ["password"],
     fieldParams: {
       id: "password",
       name: "password",
@@ -91,30 +94,28 @@ const SignUpForm = ({ registerUser, errors = [], resetErrors }) => {
     }
   };
 
-  const renderErrors = () =>
-    !!errors.length && (
-      <ul>
-        {errors.map((e, i) => (
-          <li key={i}>{e}</li>
-        ))}
-      </ul>
-    );
-
   return (
-    <form
-      onSubmit={formik.handleSubmit}
-      className="sign-up-form"
-      ref={signUpForm}
-    >
-      <label htmlFor="username">Username</label>
-      <Input {...{ ...usernameInputParams }} />
-      <label htmlFor="email">Email</label>
-      <Input {...{ ...emailInputParams }} />
-      <label htmlFor="password">Password</label>
-      <Input {...{ ...passwordInputParams }} />
-      <Button copy="Sign Up" />
-      <div className="signup-errors">{renderErrors()}</div>
-    </form>
+    <>
+      <Header copy="Sign Up" classes={["signup-modal"]} />
+      <form onSubmit={formik.handleSubmit} className="form" ref={signUpForm}>
+        <div className="inputs-container">
+          <div className="input-container">
+            <label htmlFor="username">Username: </label>
+            <Input {...{ ...usernameInputParams }} />
+          </div>
+          <div className="input-container">
+            <label htmlFor="email">Email: </label>
+            <Input {...{ ...emailInputParams }} />
+          </div>
+          <div className="input-container">
+            <label htmlFor="password">Password: </label>
+            <Input {...{ ...passwordInputParams }} />
+          </div>
+        </div>
+        <Button copy="Sign Up" />
+      </form>
+      <div className="errors">{renderErrors(errors)}</div>
+    </>
   );
 };
 

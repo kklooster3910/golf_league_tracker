@@ -6,6 +6,7 @@ import {
 
 const initialState = {
   currentCourse: {
+    _id: "",
     courseName: "",
     par: "",
     yardage: "",

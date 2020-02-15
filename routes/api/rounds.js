@@ -2,25 +2,34 @@ const express = require("express");
 const router = express.Router();
 
 const Round = require("../../models/Round");
+const Season = require("../../models/Season");
 const Player = require("../../models/User");
 const aSyncMap = require("./mongo_api").aSyncMap;
 
 router.post("/newRound", async (req, res) => {
-  const { startTime, startDate } = req.body;
-  let { players, scores } = req.body;
-  try {
-    players = await aSyncMap(players, Player.findById, Player);
-  } catch (e) {
-    console.error(e);
-  }
+  const { startTime, startDate, course, season, players, scores } = req.body;
   const newRound = {
     startTime,
     startDate,
     scores,
-    players
+    players,
+    course,
+    season
   };
   new Round(newRound)
     .save()
+    .then(async round => {
+      const _season = await Season.findById({ _id: season });
+      _season.rounds.push(round);
+      _season.save();
+      res.json(round);
+    })
+    .catch(err => console.error(err));
+});
+
+router.patch("/addScores", async (req, res) => {
+  const { scores, round: roundId } = req.body;
+  Round.updateOne({ _id: `${roundId}` }, { $addToSet: { scores: [...scores] } })
     .then(round => res.json(round))
     .catch(err => console.error(err));
 });
@@ -29,8 +38,14 @@ router.get("/round/:id", async (req, res) => {
   const { id: roundId } = req.params;
   let round;
   try {
-    round = await Round.findById({ _id: roundId });
-    round = await Round.populatePlayers(round);
+    round = await Round.findById({ _id: roundId })
+      .populate({
+        path: "players",
+        select: "averages handicap _id username putts"
+      })
+      .populate({ path: "course" })
+      .populate({ path: "season" })
+      .lean();
   } catch (e) {
     console.error(e);
   }

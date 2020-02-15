@@ -4,12 +4,20 @@
   padding: 5px;
   button {
     background-color: $brightGreen;
+    margin: 15px;
     font-size: normal;
     color: $medGrey;
     height: 2rem;
     width: 6rem;
-    border-radius: 5rem;
+    border-radius: 5px;
     font-weight: bold;
     border: transparent;
+    &:focus {
+      outline: none;
+    }
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 9px 6px 17px -1px $darkGrey;
+    }
   }
 }

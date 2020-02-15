@@ -1,0 +1,48 @@
+@import "../global.scss";
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0.5rem;
+  height: 70%;
+  .inputs-container {
+    width: 90%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    .input-container {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+  .button {
+    button {
+      height: 3rem;
+      width: 8rem;
+      font-size: 1rem;
+    }
+  }
+  label {
+    padding: 10px;
+    font-size: 1.2rem;
+    color: $medGrey;
+    align-self: center;
+  }
+}
+
+.errors {
+  margin: 25px;
+  ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    li {
+      text-align: center;
+      font-weight: bold;
+      color: red;
+      padding: 4px;
+    }
+  }
+}
