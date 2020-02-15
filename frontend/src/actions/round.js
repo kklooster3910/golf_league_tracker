@@ -14,8 +14,8 @@ export const receiveRoundErrors = errors => ({
 });
 
 // try re-writing this in async pattern?
-export const fetchRound = RoundId => dispatch => {
-  APIUtil.roundInfo(RoundId)
-    .then(res => dispatch(receiveCurrentRound(res.data)))
-    .catch(err => dispatch(receiveRoundErrors(err)));
-};
+export const fetchRound = RoundId => dispatch =>
+  APIUtil.roundInfo(RoundId).then(
+    res => dispatch(receiveCurrentRound(res.data)),
+    err => dispatch(receiveRoundErrors(err))
+  );

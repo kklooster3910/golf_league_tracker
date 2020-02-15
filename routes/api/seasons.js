@@ -53,4 +53,16 @@ router.get("/season/:id", async (req, res) => {
     .catch(err => console.error(err));
 });
 
+router.get("/listAllSeasons", async (req, res) => {
+  let seasonsArray;
+  try {
+    seasonsArray = await Season.find({})
+      .select("name course")
+      .populate({ path: "course" });
+  } catch (e) {
+    console.error(e);
+  }
+  if (seasonsArray) return res.json(seasonsArray);
+});
+
 module.exports = router;

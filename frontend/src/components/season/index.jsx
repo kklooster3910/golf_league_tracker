@@ -48,8 +48,10 @@ const Season = ({ fetchSeason, season = {}, location }) => {
         <div className="player">
           <div className="username">Username: {username}</div>
           <div className="handicap">Handicap: {handicap}</div>
-          <div className="averages">{formatAverages}</div>
-          <div className="putts">{formatPutts}</div>
+          {formatAverages.length && (
+            <div className="averages">{formatAverages}</div>
+          )}
+          {formatPutts && <div className="putts">{formatPutts}</div>}
         </div>
       );
     });
@@ -60,7 +62,10 @@ const Season = ({ fetchSeason, season = {}, location }) => {
       const formattedScores =
         !!scores?.length && scores.map(({ playerScores, hole }) => {});
     });
-  // debugger;
+
+  // return an empty fragment if the season hasn't been fetched yet
+  if (!_id) return <></>;
+
   return (
     <div className="season-container">
       <Header copy={seasonName} />

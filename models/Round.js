@@ -15,10 +15,6 @@ const playerScoreSchema = new Schema({
   score: { type: Number, required: true }
 });
 
-// how am I mapping the correct hole id to this hole from the course?
-// make sure you double check your add scores ep and make a add score
-// a round should be setup to have two opponents
-
 const scoresSchema = new Schema({
   hole: { type: Schema.Types.ObjectId, ref: "hole" },
   playerScores: [playerScoreSchema]

@@ -8,7 +8,7 @@ import { Button } from "../shared_comps";
 
 import "./navbar.scss";
 
-const NavBar = ({ username, logUserOut, isLoggedIn }) => {
+const NavBar = ({ username, logout, isLoggedIn }) => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
 
@@ -39,7 +39,7 @@ const NavBar = ({ username, logUserOut, isLoggedIn }) => {
         <div className="log-in-out-buttons">
           {isLoggedIn ? (
             <Button
-              action={() => logUserOut()}
+              action={() => logout()}
               copy="Logout"
               classes={["logout"]}
             />
@@ -70,7 +70,5 @@ export default connect(
     username: session.user.username,
     isLoggedIn: session.isAuthenticated
   }),
-  dispatch => ({
-    logUserOut: () => dispatch(logout())
-  })
+  { logout }
 )(NavBar);

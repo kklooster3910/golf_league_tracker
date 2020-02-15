@@ -9,7 +9,7 @@ import { Button, Input, Header, renderErrors } from "../shared_comps";
 
 import "./form.scss";
 
-const SignUpForm = ({ registerUser, errors = [], resetErrors }) => {
+const SignUpForm = ({ signup, errors = [], resetErrors }) => {
   const signUpForm = useRef(null);
   const usernameInput = useRef(null);
   const passwordInput = useRef(null);
@@ -42,7 +42,7 @@ const SignUpForm = ({ registerUser, errors = [], resetErrors }) => {
       email,
       password
     };
-    registerUser(user);
+    signup(user);
     Array.from(signUpForm.current).forEach(input => (input.value = ""));
   };
 
@@ -121,8 +121,5 @@ const SignUpForm = ({ registerUser, errors = [], resetErrors }) => {
 
 export default connect(
   ({ errors }) => ({ errors: Object.values(errors.session) }),
-  dispatch => ({
-    registerUser: user => dispatch(signup(user)),
-    resetErrors: () => dispatch(resetErrors())
-  })
+  { signup, resetErrors }
 )(SignUpForm);

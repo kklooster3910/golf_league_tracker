@@ -8,7 +8,7 @@ import { Button, Input, Header, renderErrors } from "../shared_comps";
 
 import "./form.scss";
 
-const LoginForm = ({ loginUser, errors = [], resetErrors }) => {
+const LoginForm = ({ login, errors = [], resetErrors }) => {
   const loginForm = useRef(null);
   const usernameInput = useRef(null);
   const passwordInput = useRef(null);
@@ -18,7 +18,7 @@ const LoginForm = ({ loginUser, errors = [], resetErrors }) => {
       username,
       password
     };
-    loginUser(user);
+    login(user);
     Array.from(loginForm.current).forEach(inpt => (inpt.value = ""));
   };
 
@@ -97,8 +97,8 @@ const LoginForm = ({ loginUser, errors = [], resetErrors }) => {
 
 export default connect(
   ({ errors }) => ({ errors: Object.values(errors.session) }),
-  dispatch => ({
-    loginUser: user => dispatch(login(user)),
-    resetErrors: () => dispatch(resetErrors())
-  })
+  {
+    login,
+    resetErrors
+  }
 )(LoginForm);

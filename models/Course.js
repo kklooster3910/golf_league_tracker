@@ -4,13 +4,15 @@ const Schema = mongoose.Schema;
 const frontNineSchema = new Schema({
   par: { type: Number, required: true },
   distances: { type: Array, default: [] },
-  handicap: { type: Number, required: true }
+  handicap: { type: Number, required: true },
+  holeNumber: { type: Number, required: true }
 });
 
 const backNineSchema = new Schema({
   par: { type: Number, required: true },
   distances: { type: Array, default: [] },
-  handicap: { type: Number, required: true }
+  handicap: { type: Number, required: true },
+  holeNumber: { type: Number, required: true }
 });
 
 const CourseSchema = new Schema({

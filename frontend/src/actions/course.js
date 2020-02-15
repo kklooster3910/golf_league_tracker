@@ -13,10 +13,9 @@ export const receiveCourseErrors = errors => ({
   errors
 });
 
-export const fetchCourse = courseId => dispatch => {
-  APIUtil.courseInfo(courseId)
-    .then(res => {
-      dispatch(receiveCurrentCourse(res.data));
-    })
-    .catch(err => dispatch(receiveCourseErrors(err)));
-};
+export const fetchCourse = courseId => dispatch =>
+  APIUtil.courseInfo(courseId).then(res =>
+    dispatch(receiveCurrentCourse(res.data), err =>
+      dispatch(receiveCourseErrors(err))
+    )
+  );

@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 
 import { Modal, ModalWrapper } from "./modal";
 
@@ -21,4 +20,4 @@ const SignUpModal = ({ isSignUpModalOpen, setIsSignUpModalOpen }) => {
   );
 };
 
-export default connect(null, null)(SignUpModal);
+export default SignUpModal;
