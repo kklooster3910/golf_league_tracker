@@ -6,9 +6,9 @@ const mapCleanKeys = require("./model_api").mapCleanKeys;
 const cleanPlayersFunc = require("./model_api").cleanPlayersFunc;
 const aSyncMap = require("../routes/api/mongo_api").aSyncMap;
 
-const players = {
-  player: { type: Schema.Types.ObjectId, ref: "User" }
-};
+// const players = {
+//   player: { type: Schema.Types.ObjectId, ref: "User" }
+// };
 
 const playerScoreSchema = new Schema({
   player: { type: Schema.Types.ObjectId, ref: "User" },
@@ -20,29 +20,23 @@ const scoresSchema = new Schema({
   playerScores: [playerScoreSchema]
 });
 
+// so you can have a cart riding together be a matchup?
+// const matchupsSchema = new Schema({
+
+// })
+
 const RoundSchema = new Schema({
   startTime: { type: Date, required: true },
   startDate: { type: Date, required: true },
   players: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  // matchups: [matchupSchema],
   scores: [scoresSchema],
   course: { type: Schema.Types.ObjectId, ref: "Course" },
-  season: { type: Schema.Types.ObjectId, ref: "Season" }
+  season: { type: Schema.Types.ObjectId, ref: "Season" },
+  isFinished: { type: Boolean, default: false }
 });
 
-//DEP
-RoundSchema.statics.populatePlayers = async roundObj => {
-  const cleanRound = await mapCleanKeys(roundObj, ["players"]);
-  const players = await aSyncMap(
-    roundObj.players.map(p => p.id),
-    Player.findById,
-    Player
-  );
-  const cleanPlayers = [];
-  await cleanPlayersFunc(players, cleanPlayers);
-
-  cleanRound.players = cleanPlayers;
-
-  return cleanRound;
-};
+//limit the players arry to fourSome array length?
+// const playerLimit = arr => arr.length <= 4;
 
 module.exports = Round = mongoose.model("Round", RoundSchema);

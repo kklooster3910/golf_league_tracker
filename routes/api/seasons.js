@@ -16,10 +16,7 @@ router.post("/createSeason", async (req, res) => {
     players,
     course
   } = req.body;
-  try {
-  } catch (e) {
-    console.error(e);
-  }
+
   const newSeason = {
     startDate,
     endDate,

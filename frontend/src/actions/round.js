@@ -19,3 +19,9 @@ export const fetchRound = RoundId => dispatch =>
     res => dispatch(receiveCurrentRound(res.data)),
     err => dispatch(receiveRoundErrors(err))
   );
+
+export const createRound = roundData => dispatch =>
+  APIUtil.newRound(roundData).then(
+    res => dispatch(receiveCurrentRound(res.data)),
+    err => dispatch(receiveRoundErrors(err))
+  );

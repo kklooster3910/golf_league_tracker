@@ -56,6 +56,7 @@ const Season = ({ fetchSeason, season = {}, location }) => {
       );
     });
 
+  // lolz... you ever going to finish this fnc?
   const mapRounds =
     !!rounds?.length &&
     rounds.map(({ startTime, startDate, scores = [] }) => {
@@ -85,7 +86,10 @@ const Season = ({ fetchSeason, season = {}, location }) => {
         isModalOpen={isRoundModalOpen}
         render={() => (
           <ModalWrapper>
-            <RoundForm course={course} seasonId={_id} />
+            <RoundForm
+              {...{ courseId: course?._id, rounds, players }}
+              seasonId={_id}
+            />
           </ModalWrapper>
         )}
       ></Modal>

@@ -4,7 +4,6 @@ const router = express.Router();
 const Round = require("../../models/Round");
 const Season = require("../../models/Season");
 const Player = require("../../models/User");
-const aSyncMap = require("./mongo_api").aSyncMap;
 
 router.post("/newRound", async (req, res) => {
   const { startTime, startDate, course, season, players, scores } = req.body;
@@ -16,6 +15,7 @@ router.post("/newRound", async (req, res) => {
     course,
     season
   };
+
   new Round(newRound)
     .save()
     .then(async round => {
@@ -27,7 +27,7 @@ router.post("/newRound", async (req, res) => {
     .catch(err => console.error(err));
 });
 
-router.patch("/addScores", async (req, res) => {
+router.put("/addScores", async (req, res) => {
   const { scores, round: roundId } = req.body;
   Round.updateOne({ _id: `${roundId}` }, { $addToSet: { scores: [...scores] } })
     .then(round => res.json(round))

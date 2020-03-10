@@ -13,14 +13,16 @@ export const Modal = props => {
     visible: isModalOpen
   });
 
-  // TRY AND WRITE A QUICK FUNC/EVENT LISTENER
-  // THAT goes for the html/body and freezes y scroll
-  // so you can't scroll the background when the modal
-  // is open
-
-  // useEffect(() => {
-  //   // document
-  // }, []);
+  useEffect(() => {
+    if (isModalOpen) {
+      document.getRootNode().children[0].classList.add("freezeBackground");
+      document.querySelector("body").classList.add("freezeBackground");
+    }
+    return () => {
+      document.getRootNode().children[0].classList.remove("freezeBackground");
+      document.querySelector("body").classList.remove("freezeBackground");
+    };
+  }, [isModalOpen]);
 
   return (
     <div className={modalClasses}>

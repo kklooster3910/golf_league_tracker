@@ -18,6 +18,10 @@
   display: block;
 }
 
+.freezeBackground {
+  overflow-y: hidden;
+}
+
 .content-container {
   position: absolute;
   top: 50%;
